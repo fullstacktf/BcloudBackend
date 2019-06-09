@@ -1,11 +1,10 @@
 {
-  "name": "adventure_book",
+  "name": "Bcloud",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Grupo10 SyTW18/19",
+  "author": "Grupo5",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
     "server": "node src/server/app.js",
     "build": "webpack"
   },
