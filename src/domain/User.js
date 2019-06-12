@@ -7,6 +7,6 @@ class User {
 }
 
 
-modules.exports = {
+module.exports = {
   User
 }

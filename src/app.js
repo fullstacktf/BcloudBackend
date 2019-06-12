@@ -1,20 +1,14 @@
 var express = require("express");
 var bodyParse = require("body-parser");
 var cors = require("cors");
-var Mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
-Mongoose.connect("mongodb://localhost:27017/prueba");
-
-Mongoose.set("useFindAndModify", false);
 var app = express();
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(bodyParse.json());
 //control de acceso (CORS)
 app.use(cors());
 
-var Schema = Mongoose.Schema;
+
 
 app.listen(process.env.PORT || 8081, function(err) {
   if (err) {
@@ -23,26 +17,7 @@ app.listen(process.env.PORT || 8081, function(err) {
   console.log("Escuchando en el Puerto 8081");
 });
 
-var LibreriaSchema = new Schema(
-  {
-    name: String,
-    tipo: Array
-  },
-  { collection: "Libreria" }
-);
 
-var LibroData = Mongoose.model("Libreria", LibreriaSchema);
-
-var UserSchema = new Schema(
-  {
-    gustos: Array,
-    email: String,
-    passw: String
-  },
-  { collection: "UserData" }
-);
-
-var UserData = Mongoose.model("UserData", UserSchema);
 
 app.post("/", (req, res) => {
   var Tipos = [
@@ -89,7 +64,7 @@ app.post("/", (req, res) => {
 app.post("/login", (req, res) => {
   console.log(req.body);
 
-  //let passwordIsValid = bcrypt.compareSync(req.body.pass, user.password);
+
   let token = jwt.sign({ id: req.body.email }, "supersecret", {
     expiresIn: 10
   });
