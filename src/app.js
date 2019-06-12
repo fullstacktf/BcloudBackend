@@ -1,14 +1,13 @@
-var express = require("express");
-var bodyParse = require("body-parser");
-var cors = require("cors");
-
-var app = express();
+const express = require("express");
+const bodyParse = require("body-parser");const cors = require("cors");
+const app = express();
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(bodyParse.json());
-//control de acceso (CORS)
 app.use(cors());
 
 
+const DbMongo = require('../src/infraestructure/DbMongo');
+const DataBase = new DbMongo("mongo");
 
 app.listen(process.env.PORT || 8081, function(err) {
   if (err) {
@@ -16,8 +15,6 @@ app.listen(process.env.PORT || 8081, function(err) {
   }
   console.log("Escuchando en el Puerto 8081");
 });
-
-
 
 app.post("/", (req, res) => {
   var Tipos = [
@@ -63,8 +60,6 @@ app.post("/", (req, res) => {
 
 app.post("/login", (req, res) => {
   console.log(req.body);
-
-
   let token = jwt.sign({ id: req.body.email }, "supersecret", {
     expiresIn: 10
   });
@@ -73,15 +68,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-  let password = bcrypt.hashSync(req.body.passw, 8);
 
-  let data = new UserData({
-    passw: password,
-    email: req.body.email,
-    gustos: []
-  });
-
-  data.save().then(console.log("Ingresado con éxito"));
-
-  res.send('../../inicio.html');
+  DataBase.addUser(req.body.email,req.body.passw);
+  res.send(200);
 });

@@ -1,4 +1,4 @@
-const {Db} = require('../domain/Db');
+const { Db } = require("../domain/Db");
 const Mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -12,7 +12,7 @@ var LibreriaSchema = new Schema(
   { collection: "Libreria" }
 );
 
-var LibroData = Mongoose.model("Libreria", LibreriaSchema);
+const LibroData = Mongoose.model("Libreria", LibreriaSchema);
 var UserSchema = new Schema(
   {
     gustos: Array,
@@ -21,21 +21,30 @@ var UserSchema = new Schema(
   },
   { collection: "UserData" }
 );
-var UserData = Mongoose.model("UserData", UserSchema);
+const UserData = Mongoose.model("UserData", UserSchema);
 
 Mongoose.connect("mongodb://localhost:27017/prueba");
 Mongoose.set("useFindAndModify", false);
 
-
-class DBMongo extends Db{
-  constructor(){
+class DbMongo extends Db {
+  constructor(name) {
     super();
-  }
-  addUser(user, passw){
-
+    this.name = name
   }
 
-  findUser(){
-      //let passwordIsValid = bcrypt.compareSync(req.body.pass, user.password);
+  findUser(email_, passw_) {
+    //let passwordIsValid = bcrypt.compareSync(req.body.pass, user.password);
+  }
+
+  addUser(email_, passw_) {
+    let cryptpassw = bcrypt.hashSync(passw_, 8);
+    let data = new UserData({
+      passw: cryptpassw,
+      email: email_,
+      gustos: []
+    });
+    data.save().then(console.log("Ingresado con éxito"));
   }
 }
+
+module.exports = DbMongo;

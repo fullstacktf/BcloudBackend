@@ -1,11 +1,11 @@
 {
-  "name": "Bcloud",
+  "name": "bcloud",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Grupo5",
   "private": true,
   "scripts": {
-    "server": "node src/server/app.js",
+    "server": "node src/app.js",
     "build": "webpack"
   },
   "nyc": {

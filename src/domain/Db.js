@@ -1,8 +1,10 @@
 
-class DB{
-  constructor(){};
+class Db{
+  addUser(){
+    throw new Error("unimplemented");
+  }
 }
 
 module.exports = {
-  DB
+  Db
 };
