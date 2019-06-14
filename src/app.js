@@ -1,12 +1,12 @@
 const express = require("express");
-const bodyParse = require("body-parser");const cors = require("cors");
+const bodyParse = require("body-parser");
+const cors = require("cors");
 const app = express();
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(bodyParse.json());
 app.use(cors());
 
-
-const DbMongo = require('../src/infraestructure/DbMongo');
+const DbMongo = require("../src/infraestructure/DbMongo");
 const DataBase = new DbMongo("mongo");
 
 app.listen(process.env.PORT || 8081, function(err) {
@@ -58,17 +58,12 @@ app.post("/", (req, res) => {
   data1.save();*/
 });
 
-app.post("/login", (req, res) => {
-  console.log(req.body);
-  let token = jwt.sign({ id: req.body.email }, "supersecret", {
-    expiresIn: 10
-  });
-
-  res.send({ token: token });
+app.post("/login", async (req, res) => {
+  const a = await DataBase.findUser(req.body.email,req.body.passw);
+  res.send({ a });
 });
 
 app.post("/signup", (req, res) => {
-
-  DataBase.addUser(req.body.email,req.body.passw);
+  DataBase.addUser(req.body.email, req.body.passw);
   res.send(200);
 });

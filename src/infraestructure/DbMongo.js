@@ -32,7 +32,19 @@ class DbMongo extends Db {
     this.name = name
   }
 
-  findUser(email_, passw_) {
+  async findUser(email_, passw_) {
+    let token = jwt.sign({ id: email_ }, "supersecret", {
+      expiresIn: 10
+    });
+    
+    const usuario = await UserData.findOne({email: email_}, async (err, data) => { 
+      console.log(data);
+      return data;
+    });
+
+    return usuario;
+
+
     //let passwordIsValid = bcrypt.compareSync(req.body.pass, user.password);
   }
 
