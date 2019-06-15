@@ -59,8 +59,8 @@ app.post("/", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const a = await DataBase.findUser(req.body.email,req.body.passw);
-  res.send({ a });
+  const token = await DataBase.findUser(req.body.email,req.body.passw);
+  res.send({ token });
 });
 
 app.post("/signup", (req, res) => {

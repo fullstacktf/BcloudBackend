@@ -1,51 +1,26 @@
 const { Db } = require("../domain/Db");
-const Mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-const Schema = Mongoose.Schema;
-var LibreriaSchema = new Schema(
-  {
-    name: String,
-    tipo: Array
-  },
-  { collection: "Libreria" }
-);
-
-const LibroData = Mongoose.model("Libreria", LibreriaSchema);
-var UserSchema = new Schema(
-  {
-    gustos: Array,
-    email: String,
-    passw: String
-  },
-  { collection: "UserData" }
-);
-const UserData = Mongoose.model("UserData", UserSchema);
-
-Mongoose.connect("mongodb://localhost:27017/prueba");
-Mongoose.set("useFindAndModify", false);
+const { UserData } = require("./models");
+const { LibroData } = require("./models");
 
 class DbMongo extends Db {
   constructor(name) {
     super();
-    this.name = name
+    this.name = name;
   }
 
   async findUser(email_, passw_) {
-    let token = jwt.sign({ id: email_ }, "supersecret", {
-      expiresIn: 10
-    });
-    
-    const usuario = await UserData.findOne({email: email_}, async (err, data) => { 
-      console.log(data);
-      return data;
-    });
+    const user = await UserData.findOne({ email: email_ });
+    let passwordIsValid = bcrypt.compareSync(passw_, user.passw);
 
-    return usuario;
-
-
-    //let passwordIsValid = bcrypt.compareSync(req.body.pass, user.password);
+    if (passwordIsValid) {
+      let token = jwt.sign({ id: email_ }, "supersecret", {
+        expiresIn: 10
+      });
+      return token;
+    } else
+        return "";
   }
 
   addUser(email_, passw_) {
