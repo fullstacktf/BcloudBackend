@@ -32,6 +32,13 @@ class DbMongo extends Db {
     });
     data.save().then(console.log("Ingresado con éxito"));
   }
+
+  async existUser(email_){
+    const user = await UserData.findOne({ email: email_ });
+    if(user != null )
+      return true;
+    else return false;
+  }
 }
 
 module.exports = DbMongo;

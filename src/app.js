@@ -63,7 +63,12 @@ app.post("/login", async (req, res) => {
   res.send({ token });
 });
 
-app.post("/signup", (req, res) => {
-  DataBase.addUser(req.body.email, req.body.passw);
-  res.send(200);
+app.post("/signup", async (req, res) => {
+  const exist = await DataBase.existUser(req.body.email);
+  if(exist)
+    res.send("Email ya usado");
+  else{
+    DataBase.addUser(req.body.email, req.body.passw);
+    res.send(200);
+  }
 });
