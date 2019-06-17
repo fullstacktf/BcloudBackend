@@ -9,7 +9,7 @@ app.use(cors());
 const DbMongo = require("../src/infraestructure/DbMongo");
 const DataBase = new DbMongo("mongo");
 
-app.listen(process.env.PORT || 8081, function(err) {
+app.listen(process.env.PORT || 8081, err => {
   if (err) {
     console.log(err);
   }
@@ -17,11 +17,7 @@ app.listen(process.env.PORT || 8081, function(err) {
 });
 
 app.post("/", (req, res) => {
-  var Tipos = [
-    { tipo: "Thriller", pond: 1.0, similiar: ["Romantica"] },
-    { tipo: "Aventura", pond: 1.0, similiar: ["Romantica"] },
-    { tipo: "Romantica", pond: 1.0, similiar: ["Romantica"] }
-  ];
+  var Tipos;
 
   var gustosUser = ["Thriller", "Aventura"];
 

@@ -7,7 +7,6 @@ const { LibroData } = require("./models");
 class DbMongo extends Db {
   constructor(name) {
     super();
-    this.name = name;
   }
 
   async findUser(email_, passw_) {
@@ -22,7 +21,6 @@ class DbMongo extends Db {
     } else
         return "";
   }
-
   addUser(email_, passw_) {
     let cryptpassw = bcrypt.hashSync(passw_, 8);
     let data = new UserData({
@@ -32,7 +30,6 @@ class DbMongo extends Db {
     });
     data.save().then(console.log("Ingresado con éxito"));
   }
-
   async existUser(email_){
     const user = await UserData.findOne({ email: email_ });
     if(user != null )
