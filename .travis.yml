@@ -3,7 +3,7 @@ node_js:
   - node
 branches:
   only:
-    - develop
+    - master
 
 script:
   - npm i
