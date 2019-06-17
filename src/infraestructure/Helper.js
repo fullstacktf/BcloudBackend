@@ -1,6 +1,5 @@
 class Helper {
-  static checkUser() {}
-
+  
   static formatUserData() {}
 }
 
