@@ -4,7 +4,12 @@ const Schema = Mongoose.Schema;
 var LibreriaSchema = new Schema(
   {
     name: String,
-    tipo: Array
+    genero: Array,
+    autor: String,
+    fechaPublicacion: Date,
+    descripcion: String,
+    valoracion: Number
+
   },
   { collection: "Libreria" }
 );
@@ -14,7 +19,9 @@ var UserSchema = new Schema(
   {
     gustos: Array,
     email: String,
-    passw: String
+    passw: String,
+    librosAdquiridos: Array,
+    nickName: String
   },
   { collection: "UserData" }
 );
