@@ -17,41 +17,7 @@ app.listen(process.env.PORT || 8081, err => {
 });
 
 app.post("/", (req, res) => {
-  var Tipos;
-
-  var gustosUser = ["Thriller", "Aventura"];
-
-  gustosUser.forEach(function(i) {
-    Tipos.forEach(function(j) {
-      if (i == j.tipo) j.pond *= 3;
-      j.similiar.forEach(function(k) {
-        if (j.tipo == k) {
-          j.pond *= 1.5;
-        }
-      });
-    });
-  });
-
-  Tipos.sort(compare);
-  Tipos.forEach(function(i) {
-    console.log(i.tipo, i.pond);
-  });
-
-  res.send(Tipos);
-
-  /*
-  var data = new LibroData({
-      name: "El quijotee",
-      tipo: ["Ficción","Aventura"]
-  });
-
-  var data1 = new UserData({
-      name: "Sergio",
-      gustos: ["Ficción","Aventura"]
-  });
-
-  data.save();
-  data1.save();*/
+  res.status(200).send("Bienvenido a Bcloud");
 });
 
 app.post("/login", async (req, res) => {

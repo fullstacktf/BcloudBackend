@@ -3,25 +3,28 @@ const Mongoose = require("mongoose");
 const Schema = Mongoose.Schema;
 var LibreriaSchema = new Schema(
   {
-    name: String,
+    nombre: String,
     genero: Array,
     autor: String,
     fechaPublicacion: Date,
     descripcion: String,
-    valoracion: Number
+    valoracion: Number,
+    url: String,
+    price: Number
 
   },
-  { collection: "Libreria" }
+  { collection: "BookData" }
 );
 
-const LibroData = Mongoose.model("Libreria", LibreriaSchema);
+const LibroData = Mongoose.model("BookData", LibreriaSchema);
 var UserSchema = new Schema(
   {
     gustos: Array,
     email: String,
     passw: String,
     librosAdquiridos: Array,
-    nickName: String
+    nickName: String,
+    librosFavoritos: Array
   },
   { collection: "UserData" }
 );

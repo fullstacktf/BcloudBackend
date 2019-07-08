@@ -8,7 +8,7 @@
     "server": "node src/app.js",
     "build": "webpack",
     "test": "jest --watch",
-    "testTravis": "jest"
+    "uniquetest": "jest"
   },
   "nyc": {
     "include": [
