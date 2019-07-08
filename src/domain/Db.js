@@ -1,13 +1,6 @@
 
-class Db{
-  constructor (){
-    
-  }
+export class Db{
   addUser(){
     throw new Error("unimplemented");
   }
 }
-
-module.exports = {
-  Db
-};
