@@ -1,12 +1,11 @@
-import { Db } from "../domain/Db";
 import { compareSync, hashSync } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { UserData } from "./models";
-import { LibroData } from "./models";
+import { UserSchema as UserData} from "./models";
 
-class DbMongo extends Db {
+export class DbMongo {
+  
   constructor(name) {
-    super();
+    this.name = name
   }
 
   async findUser(email_, passw_) {
@@ -41,5 +40,3 @@ class DbMongo extends Db {
     else return false;
   }
 }
-
-export default DbMongo;

@@ -1,11 +1,13 @@
-import express from "express";
-import cors from "cors";
+import express from 'express';
+import cors from 'cors';
+import {DbMongo} from "../src/infraestructure/DbMongo";
 const app = express();
-app.use(json());
+
+app.use(express.json());
 app.use(cors());
 
-import DbMongo from "../src/infraestructure/DbMongo";
-const DataBase = new DbMongo("mongo");
+
+const DataBase = new DbMongo('mongo');
 
 app.listen(process.env.PORT || 8081, err => {
   if (err) {
