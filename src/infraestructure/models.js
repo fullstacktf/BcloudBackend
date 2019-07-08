@@ -1,6 +1,6 @@
-const Mongoose = require("mongoose");
+import { Schema as _Schema, model, connect, set } from "mongoose";
 
-const Schema = Mongoose.Schema;
+const Schema = _Schema;
 var LibreriaSchema = new Schema(
   {
     nombre: String,
@@ -16,7 +16,7 @@ var LibreriaSchema = new Schema(
   { collection: "BookData" }
 );
 
-const LibroData = Mongoose.model("BookData", LibreriaSchema);
+export const LibroData = model("BookData", LibreriaSchema);
 var UserSchema = new Schema(
   {
     gustos: Array,
@@ -28,13 +28,7 @@ var UserSchema = new Schema(
   },
   { collection: "UserData" }
 );
-const UserData = Mongoose.model("UserData", UserSchema);
+export const UserData = model("UserData", UserSchema);
 
-Mongoose.connect("mongodb://localhost:27017/prueba");
-Mongoose.set("useFindAndModify", false);
-
-
-module.exports = {
-  LibroData: LibroData,
-  UserData: UserData
-}
+connect("mongodb://localhost:27017/prueba");
+set("useFindAndModify", false);

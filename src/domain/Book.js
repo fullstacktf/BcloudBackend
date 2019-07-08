@@ -1,5 +1,5 @@
 
-class Book {
+export class Book {
   constructor(){
     this.types = [
       { tipo: "Thriller",  similiar: ["Terror","Investigación"] },
@@ -20,5 +20,3 @@ class Book {
     ]
   }
 }
-
-module.exports = Book;

@@ -1,12 +1,10 @@
-const express = require("express");
-const bodyParse = require("body-parser");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 const app = express();
-app.use(bodyParse.urlencoded({ extended: true }));
-app.use(bodyParse.json());
+app.use(json());
 app.use(cors());
 
-const DbMongo = require("../src/infraestructure/DbMongo");
+import DbMongo from "../src/infraestructure/DbMongo";
 const DataBase = new DbMongo("mongo");
 
 app.listen(process.env.PORT || 8081, err => {
@@ -16,7 +14,9 @@ app.listen(process.env.PORT || 8081, err => {
   console.log("Escuchando en el Puerto 8081");
 });
 
-app.post("/", (req, res) => {
+
+
+app.get("/", (req, res) => {
   res.status(200).send("Bienvenido a Bcloud");
 });
 

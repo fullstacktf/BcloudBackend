@@ -1,4 +1,4 @@
-const Recommender = require("../domain/Recommender");
+import Recommender from "../domain/Recommender";
 
 class BasicRecommender extends Recommender {
   constructor() {
@@ -27,4 +27,4 @@ class BasicRecommender extends Recommender {
   }
 }
 
-module.exports = BasicRecommender;
+export default BasicRecommender;
