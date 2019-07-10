@@ -54,6 +54,20 @@ export class DbMongo extends Db{
     const user = await UserData.findOne({ email: email_ });
     if(user != null )
       return true;
-    else return false;
+    else 
+      return false;
   }
+
+  async getBooksUser(email_){
+    const data = await UserData.findOne({email:email_});
+    const books = {
+        librosAdquiridos: data.librosAdquiridos,
+        librosFavoritos: data.librosFavoritos
+    }
+    return books;
+  }
+
+
+
+
 }
