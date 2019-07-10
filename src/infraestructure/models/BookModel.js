@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const LibreriaSchema = mongoose.Schema(
   {
-    nombre: String,
+    titulo: String,
     genero: Array,
     autor: String,
     fechaPublicacion: Date,

@@ -59,10 +59,24 @@ export class DbMongo extends Db{
   }
 
   async getBooksUser(email_){
+    
+    const dataBookAdquiridos = [];
+    const dataBookFavoritos = [];
     const data = await UserData.findOne({email:email_});
+    
+    for(let l of data.librosAdquiridos){
+      const d = await BookData.findOne({titulo: l});
+      dataBookAdquiridos.push(d);
+    };
+
+    for(let l of data.librosFavoritos){
+      const d = await BookData.findOne({titulo: l});
+      dataBookFavoritos.push(d);
+    };
+
     const books = {
-        librosAdquiridos: data.librosAdquiridos,
-        librosFavoritos: data.librosFavoritos
+        librosAdquiridos: dataBookAdquiridos,
+        librosFavoritos: dataBookFavoritos
     }
     return books;
   }
