@@ -1,4 +1,5 @@
 import {Db} from '../../domain/Db';
+import {Book} from '../../domain/Book'
 import { compareSync, hashSync } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import UserData from "../models/UserModel";
@@ -28,10 +29,19 @@ export class DbMongo extends Db{
   
   addUser(email_, passw_) {
     let cryptpassw = hashSync(passw_, 8);
+    let book = new Book();
+    let likes = [];
+    book.types.forEach(t =>{
+      let d = {
+        like:t['tipo'],
+        pond: 1
+      }
+      likes.push(d);
+    })
     let data = new UserData({
       passw: cryptpassw,
       email: email_,
-      gustos: [],
+      gustos: likes,
       librosAdquiridos:[],
       nickName:"",
       librosFavoritos:[]

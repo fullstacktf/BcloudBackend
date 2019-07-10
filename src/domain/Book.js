@@ -2,21 +2,21 @@
 export class Book {
   constructor(){
     this.types = [
-      { tipo: "Thriller",  similiar: ["Terror","Investigación"] },
-      { tipo: "Aventura",  similiar: ["Ficción","Biografía"] },
-      { tipo: "Terror",  similiar: ["Thriller","Ficción","Investigación"] },
-      { tipo: "Romántica",  similiar: ["Aventura","Erótica","Sociedad","Investigación"] },
-      { tipo: "Ficción",  similiar: ["Terror","Thriller","Aventura"] },
-      { tipo: "Investigación",  similiar: ["Biografía","Enciclopedia","Autoayuda"] },
-      { tipo: "Biografía",  similiar: ["Enciclopedia","Sociedad","Autoayuda"] },
-      { tipo: "Infantil",  similiar: ["Aventura","Hogar"] },
-      { tipo: "Autoayuda",  similiar: ["Biografía","Investigación"] },
-      { tipo: "Erótica",  similiar: ["Romantica","Aventura","Biografía"] },
-      { tipo: "Hogar",  similiar: ["Romantica","Infantil","Sociedad"] },
-      { tipo: "Enciclopedia",  similiar: ["Investigación"] },
-      { tipo: "Política",  similiar: ["Investigación","Sociedad"] },
-      { tipo: "Sociedad",  similiar: ["Romantica","Política"] },
-      { tipo: "Viajes",  similiar: ["Romantica","Sociedad"] }
+      { tipo: "Thriller",  similar: ["Terror","Investigación"] },
+      { tipo: "Aventura",  similar: ["Ficción","Biografía"] },
+      { tipo: "Terror",  similar: ["Thriller","Ficción","Investigación"] },
+      { tipo: "Romántica",  similar: ["Aventura","Erótica","Sociedad","Investigación"] },
+      { tipo: "Ficción",  similar: ["Terror","Thriller","Aventura"] },
+      { tipo: "Investigación",  similar: ["Biografía","Enciclopedia","Autoayuda"] },
+      { tipo: "Biografía",  similar: ["Enciclopedia","Sociedad","Autoayuda"] },
+      { tipo: "Infantil",  similar: ["Aventura","Hogar"] },
+      { tipo: "Autoayuda",  similar: ["Biografía","Investigación"] },
+      { tipo: "Erótica",  similar: ["Romantica","Aventura","Biografía"] },
+      { tipo: "Hogar",  similar: ["Romantica","Infantil","Sociedad"] },
+      { tipo: "Enciclopedia",  similar: ["Investigación"] },
+      { tipo: "Política",  similar: ["Investigación","Sociedad"] },
+      { tipo: "Sociedad",  similar: ["Romantica","Política"] },
+      { tipo: "Viajes",  similar: ["Romantica","Sociedad"] }
     ]
   }
 }

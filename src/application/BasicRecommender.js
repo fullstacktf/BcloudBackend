@@ -4,24 +4,32 @@ export class BasicRecommender extends Recommender {
   constructor() {
     super();
   }
-  updateLikes(likes,book,newLikes) {
-    /*var Tipos;
-    likes.forEach(function(i) {
-      Tipos.forEach(function(j) {
-        if (i == j.tipo) j.pond *= 3;
-        j.similiar.forEach(function(k) {
-          if (j.tipo == k) {
-            j.pond *= 1.5;
-          }
-        });
-      });
+  compare(a,b){
+    if(a.pond < b.pond)
+      return 1;
+    if(a.pond > b.pond)
+     return -1;  
+    return 0;
+  }
+  
+  updateLikes(likes,book,newLike) {
+    let types = book.types;
+
+    likes.forEach(like => {
+      if(newLike === like['like'])
+          like['pond'] += 2;
+
+      types.forEach(type => {
+        if(type['tipo'] == like['like']){
+          type['similar'].forEach(t =>{
+            if(t === newLike)
+              like['pond'] +=1;
+          })
+        }
+      })
     });
 
-    Tipos.sort(compare);
-    Tipos.forEach(function(i) {
-      console.log(i.tipo, i.pond);
-    });*/
-    return [{like:'Thiller',pond: 3.0},{like:'Terror',pond:1.5},{like:'Aventura',pond:1.0}];
-    
+    likes.sort(this.compare);
+    return likes;
   }
 }
