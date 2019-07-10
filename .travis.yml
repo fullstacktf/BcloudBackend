@@ -7,7 +7,7 @@ branches:
 
 script:
   - npm i
-  - npm testTravis
+  - npm run testTravis
 cache:
   directories:
     - node_modules

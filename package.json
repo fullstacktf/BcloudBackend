@@ -7,12 +7,9 @@
   "scripts": {
     "dev": "babel-node src/app.js",
     "test": "jest --watch",
-    "test1": "jest",
     "testTravis": "jest"
   },
   "dependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.5.0",
     "bcrypt": "^3.0.2",
     "config": "^3.1.0",
     "cors": "^2.8.5",
@@ -27,13 +24,13 @@
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.5.0",
     "@babel/preset-env": "^7.5.0",
-    "babel-loader": "^8.0.6",
     "jest": "^24.8.0"
   },
-
   "babel": {
     "presets": [
-      ["@babel/preset-env"]
+      [
+        "@babel/preset-env"
+      ]
     ]
   }
 }
