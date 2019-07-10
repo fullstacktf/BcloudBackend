@@ -1,6 +1,6 @@
 import { Db } from "../../domain/Db";
 
-class Dbfake extends Db {
+export class Dbfake extends Db {
   constructor(name) {
     super();
   }
@@ -10,13 +10,12 @@ class Dbfake extends Db {
   addUser(email_, passw_) {
     const data = {
       email: email_,
+      gustos:{},
       passw: passw_
     };
 
     let memory = [];
     memory.push(data);
-    return memory;
+    return memory[0];
   }
 }
-
-module.exports = Dbfake;

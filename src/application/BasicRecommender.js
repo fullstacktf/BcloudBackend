@@ -1,14 +1,12 @@
 import Recommender from "../domain/Recommender";
 
-class BasicRecommender extends Recommender {
+export class BasicRecommender extends Recommender {
   constructor() {
     super();
   }
   updateLikes(likes,book,newLikes) {
-    var Tipos;
-    var gustosUser = ["Thriller", "Aventura"];
-
-    gustosUser.forEach(function(i) {
+    /*var Tipos;
+    likes.forEach(function(i) {
       Tipos.forEach(function(j) {
         if (i == j.tipo) j.pond *= 3;
         j.similiar.forEach(function(k) {
@@ -22,9 +20,8 @@ class BasicRecommender extends Recommender {
     Tipos.sort(compare);
     Tipos.forEach(function(i) {
       console.log(i.tipo, i.pond);
-    });
+    });*/
+    return [{like:'Thiller',pond: 3.0},{like:'Terror',pond:1.5},{like:'Aventura',pond:1.0}];
     
   }
 }
-
-export default BasicRecommender;
