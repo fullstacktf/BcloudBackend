@@ -1,13 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import {DbMongo} from "../src/infraestructure/DbMongo";
 const app = express();
+import userRouter from './infraestructure/routes/userRouter';
 
 app.use(express.json());
 app.use(cors());
+app.use('/users',userRouter);
 
-
-const DataBase = new DbMongo('mongo');
 
 app.listen(process.env.PORT || 8081, err => {
   if (err) {
@@ -18,21 +17,3 @@ app.listen(process.env.PORT || 8081, err => {
 
 
 
-app.get("/", (req, res) => {
-  res.status(200).send("Bienvenido a Bcloud");
-});
-
-app.post("/login", async (req, res) => {
-  const token = await DataBase.findUser(req.body.email,req.body.passw);
-  res.send({ token });
-});
-
-app.post("/signup", async (req, res) => {
-  const exist = await DataBase.existUser(req.body.email);
-  if(exist)
-    res.send("Email ya usado");
-  else{
-    DataBase.addUser(req.body.email, req.body.passw);
-    res.send(200);
-  }
-});

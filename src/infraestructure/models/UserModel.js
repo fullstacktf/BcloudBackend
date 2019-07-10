@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+mongoose.connect("mongodb://localhost:27017/prueba");
+mongoose.set("useFindAndModify", false);
 
 const UserSchema = mongoose.Schema(
     {
@@ -12,4 +13,4 @@ const UserSchema = mongoose.Schema(
     },
     { collection: "UserData" }
   );
-  export default mongoose.model("UserData", UserSchema);
+export default mongoose.model("UserData", UserSchema);

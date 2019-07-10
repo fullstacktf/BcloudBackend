@@ -1,4 +1,4 @@
-const { Db } = require("../domain/Db");
+import { Db } from "../../domain/Db";
 
 class Dbfake extends Db {
   constructor(name) {

@@ -1,10 +1,13 @@
+import {Db} from '../../domain/Db';
 import { compareSync, hashSync } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { UserSchema as UserData} from "./models";
+import UserData from "../models/UserModel";
+import BookData from "../models/BookModel";
 
-export class DbMongo {
+export class DbMongo extends Db{
   
   constructor(name) {
+    super();
     this.name = name
   }
 
@@ -14,11 +17,12 @@ export class DbMongo {
 
     if (passwordIsValid) {
       let token = sign({ id: email_ }, "supersecret", {
-        expiresIn: 10
+        expiresIn: 10000
       });
       return token;
-    } else
-        return "";
+    } 
+    else
+        return null;
   }
 
   
@@ -27,7 +31,10 @@ export class DbMongo {
     let data = new UserData({
       passw: cryptpassw,
       email: email_,
-      gustos: []
+      gustos: [],
+      librosAdquiridos:[],
+      nickName:"",
+      librosFavoritos:[]
     });
     data.save().then(console.log("Ingresado con éxito"));
   }

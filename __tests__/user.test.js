@@ -1,13 +1,13 @@
-const Dbfake = require("../src/infraestructure/Dbfake");
-const Recommender = require('../src/application/BasicRecommender');
-const Book = require('../src/domain/Book');
+import Dbfake from "../src/infraestructure/Dbfake";
+import Recommender from '../src/application/BasicRecommender';
+import Book from '../src/domain/Book';
 
 let book = new Book();
 
 describe("Testing our data bases", () => {
   it("Adding a new user", () => {
     const db = new Dbfake();
-    expect(db.addUser("sergio@gmail.com","sergiopassword")).toContainEqual({email:"sergio@gmail.com",passw:"sergiopassword"});
+    expect(db.addUser("sergio@gmail.com","sergiopassword")).toContainEqual({email:"sergio@gmail.com",passw:"sergiopassword",gustos:{}});
   });
 });
 
