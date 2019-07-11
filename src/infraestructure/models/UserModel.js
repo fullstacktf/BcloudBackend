@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-mongoose.connect("mongodb://localhost:27017/prueba");
+let uri = "mongodb://localhost:27017/prueba";
+mongoose.connect(uri, { useNewUrlParser: true });
 mongoose.set("useFindAndModify", false);
 
 const UserSchema = mongoose.Schema(

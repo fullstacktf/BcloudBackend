@@ -24,7 +24,4 @@ router.get("/booksUser", async (req,res) =>{
   res.status(200).json(response);
 })
 
-
-
-
 export default router;
