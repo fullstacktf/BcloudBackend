@@ -40,7 +40,7 @@ export class UserController {
     const newLikes = recommender.updateLikes(oldLikes,gener);
     const newData = await dataBase.setLikesUser(body.email,newLikes);
   
-    console.log(newData);
+    return newData;
     
   }
 
