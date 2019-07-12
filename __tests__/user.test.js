@@ -35,7 +35,7 @@ describe("Testing our Recommender", () => {
     {"like": "Política", "pond": 1}, {"like": "Sociedad", "pond": 1}, 
     {"like": "Infantil", "pond": 1}];
 
-    expect(recommender.updateLikes(likes,book,newLike)).toEqual(returned);
+    expect(recommender.updateLikes(likes,newLike)).toEqual(returned);
   });
 });
 

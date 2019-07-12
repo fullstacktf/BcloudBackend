@@ -1,5 +1,7 @@
 import { DbMongo } from "../databases/DbMongo";
+import { BasicRecommender } from "../../application/BasicRecommender";
 const dataBase = new DbMongo("mongo");
+const recommender = new BasicRecommender();
 
 export class UserController {
   constructor() {}
@@ -29,6 +31,17 @@ export class UserController {
   async getBooks(body){
     const books = await dataBase.getBooksUser(body.email);
     return books;
+  }
+
+  async like(body){
+    const like = await dataBase.like(body.email,body.title); 
+    const oldLikes = await dataBase.getLikesUser(body.email);
+    const gener = await dataBase.getBooksGeners(body.title);
+    const newLikes = recommender.updateLikes(oldLikes,gener);
+    const newData = await dataBase.setLikesUser(body.email,newLikes);
+  
+    console.log(newData);
+    
   }
 
 }

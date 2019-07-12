@@ -1,4 +1,7 @@
-import Recommender from "../domain/Recommender";
+import { Recommender } from "../domain/Recommender";
+import {Book } from "../domain/Book";
+
+const book = new Book();
 
 export class BasicRecommender extends Recommender {
   constructor() {
@@ -12,7 +15,7 @@ export class BasicRecommender extends Recommender {
     return 0;
   }
   
-  updateLikes(likes,book,newLike) {
+  updateLikes(likes,newLike) {
     let types = book.types;
 
     likes.forEach(like => {

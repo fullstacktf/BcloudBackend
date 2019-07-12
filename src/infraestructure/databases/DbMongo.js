@@ -81,6 +81,30 @@ export class DbMongo extends Db{
     return books;
   }
 
+  async like(email_,title_){
+    const user = await UserData.findOne({email:email_});
+    user.librosFavoritos.push(title_);
+    user.save();
+  }
+
+  async getLikesUser(email_){
+    const user = await UserData.findOne({email:email_});
+    return user.gustos;
+  }
+
+  async setLikesUser(email_,likes){
+    const user = await UserData.findOne({email:email_});
+    user.gustos = likes;
+    await user.save();
+    const newDataUser = await UserData.findOne({email:email_});
+    return newDataUser.gustos;
+  }
+
+  async getBooksGeners(title_){
+    const book = await BookData.findOne({titulo: title_});
+    return book.genero[0];
+  }
+
 
 
 
