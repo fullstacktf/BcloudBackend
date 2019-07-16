@@ -6,10 +6,11 @@ const LibreriaSchema = mongoose.Schema(
     titulo: String,
     genero: Array,
     autor: String,
-    fechaPublicacion: Date,
+    fechaPublicacion: String,
     descripcion: String,
     valoracion: Number,
-    url: String,
+    imageUrl: String,
+    ebookUrl: String,
     price: Number
 
   }, 
