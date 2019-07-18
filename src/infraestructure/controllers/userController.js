@@ -18,14 +18,16 @@ export class UserController {
   }
 
   async login(body){
-    const email = body.email;
-    const passw = body.passw;
-    const token = await dataBase.findUser(email,passw);
-    console.log(token);
+    const token = await dataBase.findUser(body.email,body.passw);
     if(token != null)
       return({ token: token })
     else 
       return({message:"Error en el login. Email o contraseña no valida"})
+  }
+
+  async verifyToken(body){
+    const response = await dataBase.verifyToken(body.jwt);
+    return response;
   }
 
   async getBooks(body){

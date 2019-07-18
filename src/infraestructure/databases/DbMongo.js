@@ -1,7 +1,7 @@
 import { Db } from "../../domain/Db";
 import { Book } from "../../domain/Book";
 import { compareSync, hashSync } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import UserData from "../models/UserModel";
 import BookData from "../models/BookModel";
 
@@ -17,10 +17,24 @@ export class DbMongo extends Db {
 
     if (passwordIsValid) {
       let token = sign({ id: email_ }, "supersecret", {
-        expiresIn: 10000
+        expiresIn: "12h"
       });
       return token;
     } else return null;
+  }
+
+  async verifyToken(jwt){
+    if(jwt) {
+      const message = await verify(jwt, 'supersecret', async (err, decoded) => {
+        if (err)
+          return({message:"Expired token"});
+        else
+          return ({token: jwt});
+      });
+      return message;
+    }
+    else
+      return ({message:"Unexist token"});
   }
 
   addUser(email_, passw_) {

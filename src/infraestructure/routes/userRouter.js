@@ -14,6 +14,11 @@ router.post("/login", async (req, res) => {
   res.status(200).json(response);
 });
 
+router.post("/verifyToken", async (req, res) => {
+  const response = await userController.verifyToken(req.body);
+  res.status(200).json(response);
+});
+
 router.post("/signup", async (req, res) => {
   const response = await userController.signup(req.body);
   res.status(200).json(response);
