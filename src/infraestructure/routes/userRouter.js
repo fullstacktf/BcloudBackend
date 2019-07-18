@@ -30,5 +30,11 @@ router.post("/like", async (req,res) =>{
 })
 
 
+router.post("/dislike", async (req,res) =>{
+  const response = await userController.dislike(req.body);
+  res.status(200).json(response);
+})
+
+
 
 export default router;

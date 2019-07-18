@@ -34,14 +34,21 @@ export class UserController {
   }
 
   async like(body){
-    const like = await dataBase.like(body.email,body.title); 
+    await dataBase.like(body.email,body.title); 
     const oldLikes = await dataBase.getLikesUser(body.email);
     const gener = await dataBase.getBooksGeners(body.title);
     const newLikes = recommender.updateLikes(oldLikes,gener);
     const newData = await dataBase.setLikesUser(body.email,newLikes);
-  
     return newData;
-    
+  }
+
+  async dislike(body){
+    await dataBase.dislike(body.email,body.title);
+    const oldLikes = await dataBase.getLikesUser(body.email);
+    const gener = await dataBase.getBooksGeners(body.title);
+    const newLikes = recommender.updateLikesNegative(oldLikes,gener);
+    const newData = await dataBase.setLikesUser(body.email,newLikes);
+    return newData;
   }
 
 }
