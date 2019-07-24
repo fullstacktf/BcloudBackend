@@ -1,6 +1,6 @@
-import { DbMongo } from "../databases/DbMongo";
+import { UserRepository } from "../repository/userRepository";
 import { BasicRecommender } from "../../application/BasicRecommender";
-const dataBase = new DbMongo("mongo");
+const userRepository = new UserRepository();
 const recommender = new BasicRecommender();
 
 export class UserController {
@@ -9,16 +9,16 @@ export class UserController {
   async signup(body) {
     const email = body.email;
     const passw = body.passw;
-    const exist = await dataBase.existUser(email);
+    const exist = await userRepository.existUser(email);
     if (exist) return({ message: "Ya existe este user" });
     else {
-      dataBase.addUser(email,passw);
+      userRepository.addUser(email,passw);
       return ({ message: "Ingresado con exito" });
     }
   }
 
   async login(body){
-    const token = await dataBase.findUser(body.email,body.passw);
+    const token = await userRepository.findUser(body.email,body.passw);
     if(token != null)
       return({ token: token })
     else 
@@ -26,30 +26,30 @@ export class UserController {
   }
 
   async verifyToken(body){
-    const response = await dataBase.verifyToken(body.jwt);
+    const response = await userRepository.verifyToken(body.jwt);
     return response;
   }
 
   async getBooks(body){
-    const books = await dataBase.getBooksUser(body.email);
+    const books = await userRepository.getBooksUser(body.email);
     return books;
   }
 
   async like(body){
-    await dataBase.like(body.email,body.title); 
-    const oldLikes = await dataBase.getLikesUser(body.email);
-    const gener = await dataBase.getBooksGeners(body.title);
+    await userRepository.like(body.email,body.title); 
+    const oldLikes = await userRepository.getLikesUser(body.email);
+    const gener = await userRepository.getBooksGeners(body.title);
     const newLikes = recommender.updateLikes(oldLikes,gener);
-    const newData = await dataBase.setLikesUser(body.email,newLikes);
+    const newData = await userRepository.setLikesUser(body.email,newLikes);
     return newData;
   }
 
   async dislike(body){
-    await dataBase.dislike(body.email,body.title);
-    const oldLikes = await dataBase.getLikesUser(body.email);
-    const gener = await dataBase.getBooksGeners(body.title);
+    await userRepository.dislike(body.email,body.title);
+    const oldLikes = await userRepository.getLikesUser(body.email);
+    const gener = await userRepository.getBooksGeners(body.title);
     const newLikes = recommender.updateLikesNegative(oldLikes,gener);
-    const newData = await dataBase.setLikesUser(body.email,newLikes);
+    const newData = await userRepository.setLikesUser(body.email,newLikes);
     return newData;
   }
 

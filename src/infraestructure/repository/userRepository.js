@@ -5,7 +5,7 @@ import { sign, verify } from "jsonwebtoken";
 import UserData from "../models/UserModel";
 import BookData from "../models/BookModel";
 
-export class DbMongo extends Db {
+export class UserRepository extends Db {
   constructor(name) {
     super();
     this.name = name;

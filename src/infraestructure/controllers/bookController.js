@@ -1,5 +1,5 @@
-import { DbMongoBook } from "../databases/DbMongoBook";
-const dataBase = new DbMongoBook("mongo");
+import { BookRepository } from "../repository/bookRepository";
+const bookRepository = new BookRepository();
 /**
  * aquí se consume la lógica de la base de datos */
 export class BookController {
@@ -8,10 +8,10 @@ export class BookController {
     async signup(body) {
       const titulo = body.titulo;
       const autor = body.autor;
-      const exist = await dataBase.existBook(titulo);
+      const exist = await bookRepository.existBook(titulo);
       if (exist) return({ message: "Ya existe este libro" });
       else {
-        dataBase.addUser(titulo,autor);
+        bookRepository.addUser(titulo,autor);
         return ({ message: "Ingresado con exito" });
       }
     }
@@ -25,7 +25,7 @@ export class BookController {
       let epubFile = files.epubFile;
       let imageFile = files.imageFile;
 
-      dataBase.addBook(body,imageFile.name,epubFile.name);
+      bookRepository.addBook(body,imageFile.name,epubFile.name);
 
       epubFile.mv(`/data/epub/${epubFile.name}`, function(err) {
         if (err) return res.status(500).send(err);
