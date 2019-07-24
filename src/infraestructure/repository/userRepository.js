@@ -37,6 +37,10 @@ export class UserRepository extends Db {
       return ({message:"Unexist token"});
   }
 
+  addNewUser(email, password) {
+    this.addUser(email, password);
+  }
+
   addUser(email_, passw_) {
     let cryptpassw = hashSync(passw_, 8);
     let book = new Book();
@@ -94,7 +98,7 @@ export class UserRepository extends Db {
   }
 
   async dislike(email_, title_) {
-    
+
     const user = await UserData.findOne({ email: email_ });
     for (let i = 0; i < user.librosFavoritos.length; i++) {
       if (user.librosFavoritos[i] === title_) {
