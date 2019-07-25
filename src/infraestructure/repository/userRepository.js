@@ -65,7 +65,32 @@ export class UserRepository extends Db {
     return new Promise((resolve, reject) => {
       email ? this.userModel.findOne({ email }).then(resolve).catch(reject):resolve(undefined);
     });
+    let data = new UserData({
+      passw: cryptpassw,
+      email: email_,
+      gustos: likes,
+      librosAdquiridos: [],
+      nickName: "",
+      librosFavoritos: []
+    });
+    data.save().then(console.log("Ingresado con éxito"));
   }
+
+  async existUser(email_) {
+    const user = await UserData.findOne({ email: email_ });
+    if (user != null) return true;
+    else return false;
+  }
+
+  async getBooksUser(email_) {
+    const dataBookAdquiridos = [];
+    const dataBookFavoritos = [];
+    const data = await UserData.findOne({ email: email_ });
+
+    for (let l of data.librosAdquiridos) {
+      const d = await BookData.findOne({ titulo: l });
+      dataBookAdquiridos.push(d);
+    }
 
   // async getBooksUser(email_) {
   //   const dataBookAdquiridos = [];
