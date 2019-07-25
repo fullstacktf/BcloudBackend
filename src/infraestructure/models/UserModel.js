@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-let uri = "mongodb://localhost:27017/prueba";
-mongoose.connect(uri, { useNewUrlParser: true });
-mongoose.set("useFindAndModify", false);
+// let uri = "mongodb://localhost:27017/prueba";
+// mongoose.connect(uri, { useNewUrlParser: true });
+// mongoose.set("useFindAndModify", false);
+
 
 const UserSchema = mongoose.Schema(
     {
@@ -14,4 +15,4 @@ const UserSchema = mongoose.Schema(
     },
     { collection: "UserData" }
   );
-export default mongoose.model("UserData", UserSchema);
+//export default mongoose.model("UserData", UserSchema);

@@ -13,8 +13,8 @@ const LibreriaSchema = mongoose.Schema(
     ebookUrl: String,
     price: Number
 
-  }, 
+  },
   { collection: "BookData" }
 );
 
-export default mongoose.model("BookData", LibreriaSchema);
+//export default mongoose.model("BookData", LibreriaSchema);
