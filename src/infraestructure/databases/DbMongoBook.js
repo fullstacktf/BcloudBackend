@@ -38,7 +38,14 @@ export class DbMongoBook extends Db {
 
     data.save();
   }
-
+  async getBook(tag_) {
+    const libro = await BookData.findOne({ tag: tag_ });
+    return libro;
+  }
+  async getAllBooks() {
+    const libro = await BookData.find({});
+    return libro;
+  }
   async addBookManu(body) {
     const str = Helper.tagged(body.titulo);
     console.log("ya volví");
