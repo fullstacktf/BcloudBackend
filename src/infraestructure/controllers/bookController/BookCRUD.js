@@ -1,5 +1,5 @@
-import { DbMongoBook } from "../../databases/DbMongoBook";
-const dataBase = new DbMongoBook("mongo");
+import { BookRepository } from "../../repository/bookRepository";
+const dataBase = new BookRepository();
 
 export class BookCRUD {
   static async signup(body) {

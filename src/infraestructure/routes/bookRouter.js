@@ -1,7 +1,5 @@
 import { Router } from "express";
-import BookController from "../controllers/bookController";
 import bookController from "../controllers/bookController";
-console.log(BookController);
 
 const router = Router();
 

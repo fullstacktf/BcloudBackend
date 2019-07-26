@@ -1,11 +1,9 @@
 import { Db } from "../../domain/Db";
 import UserData from "../models/UserModel";
 import BookData from "../models/BookModel";
-import { Helper } from "../databases/Helper";
+import { Helper } from "../repository/Helper";
 
-/**
- * en este archivo se inseeta toda la lógica de la base de datos.
- */
+
 export class BookRepository extends Db {
   async existBook(titulo_) {
     const libro = await BookData.findOne({ titulo: titulo_ });

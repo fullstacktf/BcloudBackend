@@ -1,3 +1,3 @@
-import { BookCRUD } from "./bookCRUD";
-import { BookUPLOAD } from "./bookUPLOAD";
-export default { BookCRUD, BookUPLOAD };
+import { BookCRUD } from "./BookCRUD";
+import { BookUpload } from "./BookUpload";
+export default { BookCRUD, BookUpload };

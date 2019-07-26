@@ -1,9 +1,10 @@
-import { DbMongoBook } from "../../databases/DbMongoBook";
-const dataBase = new DbMongoBook("mongo");
+import { BookRepository } from "../../repository/bookRepository";
+const dataBase = new BookRepository();
 
-export class BookUPLOAD {
-  constructor() {}
-  async uploadBook(body, files) {
+export class BookUload {
+  constructor() { }
+  
+  static async uploadBook(body, files) {
     if (Object.keys(files).length == 0) {
       return res.status(400).send("No files were uploaded.");
     }
@@ -13,11 +14,11 @@ export class BookUPLOAD {
 
     dataBase.addBook(body, imageFile.name, epubFile.name);
 
-    epubFile.mv(`/data/epub/${epubFile.name}`, function(err) {
+    epubFile.mv(`/data/epub/${epubFile.name}`, (err) => {
       if (err) return res.status(500).send(err);
     });
 
-    imageFile.mv(`/data/images/${imageFile.name}`, function(err) {
+    imageFile.mv(`/data/images/${imageFile.name}`, (err) => {
       if (err) return res.status(500).send(err);
     });
     return "File uploaded!";
