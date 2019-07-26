@@ -1,4 +1,4 @@
-import { BookRepository } from "../../repository/bookRepository";
+import { BookRepository } from "../../repository/BookRepository";
 const dataBase = new BookRepository();
 
 export class BookCRUD {

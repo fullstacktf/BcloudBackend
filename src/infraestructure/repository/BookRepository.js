@@ -1,24 +1,25 @@
 import { Db } from "../../domain/Db";
 import UserData from "../models/UserModel";
 import BookData from "../models/BookModel";
-import { Helper } from "../repository/Helper";
+import { Helper } from "./Helper";
 
 
 export class BookRepository extends Db {
   async existBook(titulo_) {
+    Helper.connectDatabase();
     const libro = await BookData.findOne({ titulo: titulo_ });
     if (libro != null) return true;
     else return false;
   }
   async existTag(tag_) {
+    Helper.connectDatabase();
     const libro = await BookData.findOne({ tag: tag_ });
     if (libro != null) return true;
     else return false;
   }
 
   async addBook(body, image, epub) {
-    console.log(image);
-    console.log(body);
+    Helper.connectDatabase();
     const data = new BookData({
       titulo: body.title,
       genero: body.gener,
@@ -30,21 +31,21 @@ export class BookRepository extends Db {
       ebookUrl: `https://bookcloud.me/epub/${epub}`,
       price: body.price
     });
-
     data.save();
   }
   async getBook(tag_) {
+    Helper.connectDatabase();
     const libro = await BookData.findOne({ tag: tag_ });
     return libro;
   }
   async getAllBooks() {
+    Helper.connectDatabase();
     const libro = await BookData.find({});
     return libro;
   }
   async addBookManu(body) {
+    Helper.connectDatabase();
     const str = Helper.tagged(body.titulo);
-    console.log("ya volví");
-    console.log(str);
     const data = new BookData({
       titulo: body.titulo,
       autor: body.autor,
@@ -53,6 +54,7 @@ export class BookRepository extends Db {
     data.save();
   }
   async delete(paramTag) {
-    BookData.deleteOne({ tag: paramTag }, function(err) {});
+    Helper.connectDatabase();
+    BookData.deleteOne({ tag: paramTag });
   }
 }

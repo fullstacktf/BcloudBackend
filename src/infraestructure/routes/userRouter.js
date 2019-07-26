@@ -18,19 +18,24 @@ router.post("/signup", async (req, res) => {
   res.status(200).json(response);
 });
 
+router.post("/verifyToken", async (req, res) => {
+  const response = await userController.UserCRUD.verifyToken(req.body);
+  res.status(200).json(response);
+});
+
 router.get("/booksUser", async (req,res) =>{
   const response = await userController.UserCRUD.getBooks(req.body);
   res.status(200).json(response);
-})
+});
 
 router.post("/like", async (req,res) =>{
   const response = await userController.UserLikes.like(req.body);
   res.status(200).json(response);
-})
+});
 
 router.post("/dislike", async (req,res) =>{
   const response = await userController.UserLikes.dislike(req.body);
   res.status(200).json(response);
-})
+});
 
 export default router;

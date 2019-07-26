@@ -1,16 +1,14 @@
-import { UserRepository } from "../../repository/userRepository";
+import { UserRepository } from "../../repository/UserRepository";
 const userRepository = new UserRepository();
 
 export class UserCRUD {
   constructor() {}
 
   static async signup(body) {
-    const email = body.email;
-    const passw = body.passw;
-    const exist = await userRepository.existUser(email);
+    const exist = await userRepository.existUser(body.email);
     if (exist) return({ message: "Ya existe este user" });
     else {
-      userRepository.addUser(email,passw);
+      userRepository.addUser(body.email,body.passw);
       return ({ message: "Ingresado con exito" });
     }
   }

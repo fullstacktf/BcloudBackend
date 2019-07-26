@@ -1,4 +1,4 @@
-import { UserRepository } from "../../repository/userRepository";
+import { UserRepository } from "../../repository/UserRepository";
 import { BasicRecommender } from "../../../application/BasicRecommender";
 const userRepository = new UserRepository();
 const recommender = new BasicRecommender();

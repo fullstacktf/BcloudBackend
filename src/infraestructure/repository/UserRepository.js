@@ -4,6 +4,7 @@ import { compareSync, hashSync } from "bcrypt";
 import { sign, verify } from "jsonwebtoken";
 import UserData from "../models/UserModel";
 import BookData from "../models/BookModel";
+import { Helper } from '../repository/Helper';
 
 export class UserRepository extends Db {
   constructor(name) {
@@ -12,6 +13,7 @@ export class UserRepository extends Db {
   }
 
   async findUser(email_, passw_) {
+    Helper.connectDatabase();
     const user = await UserData.findOne({ email: email_ });
     let passwordIsValid = compareSync(passw_, user.passw);
 
@@ -25,7 +27,7 @@ export class UserRepository extends Db {
 
   async verifyToken(jwt){
     if(jwt) {
-      const message = await verify(jwt, 'supersecret', async (err, decoded) => {
+      const message = await verify(jwt, 'supersecret', async (err) => {
         if (err)
           return({message:"Expired token"});
         else
@@ -38,6 +40,7 @@ export class UserRepository extends Db {
   }
 
   addUser(email_, passw_) {
+    Helper.connectDatabase();
     let cryptpassw = hashSync(passw_, 8);
     let book = new Book();
     let likes = [];
@@ -60,12 +63,14 @@ export class UserRepository extends Db {
   }
 
   async existUser(email_) {
+    Helper.connectDatabase();
     const user = await UserData.findOne({ email: email_ });
     if (user != null) return true;
     else return false;
   }
 
   async getBooksUser(email_) {
+    Helper.connectDatabase();
     const dataBookAdquiridos = [];
     const dataBookFavoritos = [];
     const data = await UserData.findOne({ email: email_ });
@@ -88,13 +93,14 @@ export class UserRepository extends Db {
   }
 
   async like(email_, title_) {
+    Helper.connectDatabase();
     const user = await UserData.findOne({ email: email_ });
     user.librosFavoritos.push(title_);
     user.save();
   }
 
   async dislike(email_, title_) {
-    
+    Helper.connectDatabase();
     const user = await UserData.findOne({ email: email_ });
     for (let i = 0; i < user.librosFavoritos.length; i++) {
       if (user.librosFavoritos[i] === title_) {
@@ -105,11 +111,13 @@ export class UserRepository extends Db {
   }
 
   async getLikesUser(email_) {
+    Helper.connectDatabase();
     const user = await UserData.findOne({ email: email_ });
     return user.gustos;
   }
 
   async setLikesUser(email_, likes) {
+    Helper.connectDatabase();
     const user = await UserData.findOne({ email: email_ });
     user.gustos = likes;
     await user.save();
@@ -118,6 +126,7 @@ export class UserRepository extends Db {
   }
 
   async getBooksGeners(title_) {
+    Helper.connectDatabase();
     const book = await BookData.findOne({ titulo: title_ });
     return book.genero[0];
   }
