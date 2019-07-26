@@ -1,4 +1,6 @@
 import { UserRepository } from "../../repository/UserRepository";
+import { BasicRecommender } from "../../../application/BasicRecommender";
+const recommender = new BasicRecommender();
 const userRepository = new UserRepository();
 
 export class UserCRUD {
@@ -8,7 +10,13 @@ export class UserCRUD {
     const exist = await userRepository.existUser(body.email);
     if (exist) return({ message: "Ya existe este user" });
     else {
-      userRepository.addUser(body.email,body.passw);
+      await userRepository.addUser(body);
+      const oldLikes = await userRepository.getLikesUser(body.email);
+      const geners = body.likes.split(',');
+      for(let gener of geners) {
+        const newLikes = recommender.updateLikes(oldLikes,gener);
+        await userRepository.setLikesUser(body.email,newLikes);
+      };
       return ({ message: "Ingresado con exito" });
     }
   }

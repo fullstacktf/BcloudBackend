@@ -39,27 +39,30 @@ export class UserRepository extends Db {
       return ({message:"Unexist token"});
   }
 
-  addUser(email, passw) {
+  async addUser(body) {
     Helper.connectDatabase();
-    let cryptpassw = hashSync(passw, 8);
+    let cryptpassw = hashSync(body.passw, 8);
     let book = new Book();
-    let likes = [];
+    let init = [];
     book.types.forEach(t => {
       let d = {
         like: t["tipo"],
         pond: 1
       };
-      likes.push(d);
+      init.push(d);
     });
+
+
     let data = new UserData({
       passw: cryptpassw,
-      email: email,
-      gustos: likes,
+      email: body.email,
+      gustos: init,
       librosAdquiridos: [],
-      nickName: "",
+      nickName: body.name,
       librosFavoritos: []
     });
-    data.save().then(console.log("Ingresado con éxito"));
+    await data.save();
+    console.log("ingresado con exito");
   }
 
   async existUser(email) {
