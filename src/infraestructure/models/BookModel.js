@@ -1,19 +1,18 @@
 import mongoose from "mongoose";
 
-
 const LibreriaSchema = mongoose.Schema(
   {
     titulo: String,
-    genero: Array,
     autor: String,
+    genero: Array,
     fechaPublicacion: String,
     descripcion: String,
     valoracion: Number,
     imageUrl: String,
     ebookUrl: String,
-    price: Number
-
-  }, 
+    price: Number,
+    tag: String
+  },
   { collection: "BookData" }
 );
 
