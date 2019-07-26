@@ -1,19 +1,19 @@
 import { Db } from "../../domain/Db";
-import UserData from "../models/UserModel";
 import BookData from "../models/BookModel";
 import { Helper } from "./Helper";
 
 
 export class BookRepository extends Db {
-  async existBook(titulo_) {
+  async existBook(titulo) {
     Helper.connectDatabase();
-    const libro = await BookData.findOne({ titulo: titulo_ });
+    const libro = await BookData.findOne({ titulo });
     if (libro != null) return true;
     else return false;
   }
-  async existTag(tag_) {
+
+  async existTag(tag) {
     Helper.connectDatabase();
-    const libro = await BookData.findOne({ tag: tag_ });
+    const libro = await BookData.findOne({ tag });
     if (libro != null) return true;
     else return false;
   }
@@ -33,11 +33,13 @@ export class BookRepository extends Db {
     });
     data.save();
   }
+
   async getBook(tag_) {
     Helper.connectDatabase();
     const libro = await BookData.findOne({ tag: tag_ });
     return libro;
   }
+
   async getAllBooks() {
     Helper.connectDatabase();
     const libro = await BookData.find({});

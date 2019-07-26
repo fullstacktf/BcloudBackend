@@ -1,7 +1,7 @@
 import { BookRepository } from "../../repository/BookRepository";
 const dataBase = new BookRepository();
 
-export class BookUload {
+export class BookUpload {
   constructor() { }
   
   static async uploadBook(body, files) {

@@ -12,13 +12,13 @@ export class UserRepository extends Db {
     this.name = name;
   }
 
-  async findUser(email_, passw_) {
+  async findUser(email, passw) {
     Helper.connectDatabase();
-    const user = await UserData.findOne({ email: email_ });
-    let passwordIsValid = compareSync(passw_, user.passw);
+    const user = await UserData.findOne({ email });
+    let passwordIsValid = compareSync(passw, user.passw);
 
     if (passwordIsValid) {
-      let token = sign({ id: email_ }, "supersecret", {
+      let token = sign({ id: email }, "supersecret", {
         expiresIn: "12h"
       });
       return token;
@@ -39,9 +39,9 @@ export class UserRepository extends Db {
       return ({message:"Unexist token"});
   }
 
-  addUser(email_, passw_) {
+  addUser(email, passw) {
     Helper.connectDatabase();
-    let cryptpassw = hashSync(passw_, 8);
+    let cryptpassw = hashSync(passw, 8);
     let book = new Book();
     let likes = [];
     book.types.forEach(t => {
@@ -53,7 +53,7 @@ export class UserRepository extends Db {
     });
     let data = new UserData({
       passw: cryptpassw,
-      email: email_,
+      email: email,
       gustos: likes,
       librosAdquiridos: [],
       nickName: "",
@@ -62,18 +62,18 @@ export class UserRepository extends Db {
     data.save().then(console.log("Ingresado con éxito"));
   }
 
-  async existUser(email_) {
+  async existUser(email) {
     Helper.connectDatabase();
-    const user = await UserData.findOne({ email: email_ });
+    const user = await UserData.findOne({ email });
     if (user != null) return true;
     else return false;
   }
 
-  async getBooksUser(email_) {
+  async getBooksUser(email) {
     Helper.connectDatabase();
     const dataBookAdquiridos = [];
     const dataBookFavoritos = [];
-    const data = await UserData.findOne({ email: email_ });
+    const data = await UserData.findOne({ email });
 
     for (let l of data.librosAdquiridos) {
       const d = await BookData.findOne({ titulo: l });
@@ -92,42 +92,42 @@ export class UserRepository extends Db {
     return books;
   }
 
-  async like(email_, title_) {
+  async like(email, title) {
     Helper.connectDatabase();
-    const user = await UserData.findOne({ email: email_ });
-    user.librosFavoritos.push(title_);
+    const user = await UserData.findOne({ email });
+    user.librosFavoritos.push(title);
     user.save();
   }
 
-  async dislike(email_, title_) {
+  async dislike(email, title) {
     Helper.connectDatabase();
-    const user = await UserData.findOne({ email: email_ });
+    const user = await UserData.findOne({ email});
     for (let i = 0; i < user.librosFavoritos.length; i++) {
-      if (user.librosFavoritos[i] === title_) {
+      if (user.librosFavoritos[i] === title) {
         user.librosFavoritos.splice(i, 1);
       }
     }
     user.save();
   }
 
-  async getLikesUser(email_) {
+  async getLikesUser(email) {
     Helper.connectDatabase();
-    const user = await UserData.findOne({ email: email_ });
+    const user = await UserData.findOne({ email });
     return user.gustos;
   }
 
-  async setLikesUser(email_, likes) {
+  async setLikesUser(email, likes) {
     Helper.connectDatabase();
-    const user = await UserData.findOne({ email: email_ });
+    const user = await UserData.findOne({ email });
     user.gustos = likes;
     await user.save();
-    const newDataUser = await UserData.findOne({ email: email_ });
+    const newDataUser = await UserData.findOne({ email });
     return newDataUser.gustos;
   }
 
-  async getBooksGeners(title_) {
+  async getBooksGeners(title) {
     Helper.connectDatabase();
-    const book = await BookData.findOne({ titulo: title_ });
-    return book.genero[0];
+    const book = await BookData.findOne({ titulo: title });
+    return book.genero;
   }
 }

@@ -16,8 +16,8 @@ router.delete("/delete/:titulo", async (req, res) => {
   res.status(200).json(response);
 });
 
-router.post("/upload", function(req, res) {
-  const response = bookController.BookUPLOAD.uploadBook(req.body, req.files);
+router.post("/upload", (req, res) => {
+  const response = bookController.BookUpload.uploadBook(req.body, req.files);
   res.status(200).json(response);
 });
 
