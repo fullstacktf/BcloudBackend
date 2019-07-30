@@ -135,4 +135,12 @@ export class UserRepository extends Db {
     const book = await BookData.findOne({ titulo: title });
     return book.genero;
   }
+
+  async buyBook(email, book){
+    Helper.connectDatabase();
+    const user = await UserData.findOne({ email });
+    user.librosAdquiridos.push(book);
+    user.save();
+    return { message: "Comprado con éxito" };
+  }
 }
