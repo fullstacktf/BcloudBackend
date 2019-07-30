@@ -16,8 +16,18 @@ export class Helper {
     return text;
   }
 
-  
+  static deleteDuplicatesBooks(books){
+    let booksStringify = [];
+    for (const book of books) {
+      if(!booksStringify.includes(JSON.stringify(book))){
+        booksStringify.push(JSON.stringify(book));
+      }
+    }
+    books = [];
 
-
-  
+    for (const i of booksStringify) {
+        books.push(JSON.parse(i));
+      }
+    return books;
+  }
 }

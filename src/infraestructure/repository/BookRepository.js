@@ -61,4 +61,18 @@ export class BookRepository extends Db {
     Helper.connectDatabase();
     BookData.deleteOne({ tag: paramTag });
   }
+
+  async getBookWithGeners(likesUser) {
+    Helper.connectDatabase();
+
+    let books = [];
+    for (const i of likesUser) {
+      let data = await BookData.findOne({ genero: i });
+      if(data != null)
+        books.push(data);
+    }
+    let recommendedBooks = Helper.deleteDuplicatesBooks(books);
+    return recommendedBooks;
+  } 
 }
+

@@ -32,4 +32,16 @@ export class BookCRUD {
       return { message: "No existe este libro" };
     }
   }
+
+  static async getBookWithGeners(body) {
+
+    let likes = [];
+    for (const like of body.likes.slice(0, 5)) {
+      likes.push(like.like);
+    }
+    const recommendedBooks = await dataBase.getBookWithGeners(likes);
+
+    return recommendedBooks;
+
+  }
 }

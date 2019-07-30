@@ -29,4 +29,9 @@ export class UserLikes {
     const likes = await userRepository.getLikesUser(body.email);
     return likes;
   }
+
+  static async getLikes(body){
+    const likes = await userRepository.getLikesUser(body.email);
+    return likes;
+  }
 }
