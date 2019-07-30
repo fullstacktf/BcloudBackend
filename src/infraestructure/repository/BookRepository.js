@@ -18,20 +18,22 @@ export class BookRepository extends Db {
     else return false;
   }
 
-  async addBook(body, image, epub) {
+  async addBook(body) {
     Helper.connectDatabase();
+    let urls = Helper.tagged(body.title);
     const data = new BookData({
       titulo: body.title,
-      genero: body.gener,
+      genero: body.gener.split(','),
       autor: body.author,
       fechaPublicacion: body.publicationDate,
       descripcion: body.description,
       valoracion: body.rating,
-      imageUrl: `https://bookcloud.me/images/${image}`,
-      ebookUrl: `https://bookcloud.me/epub/${epub}`,
+      imageUrl: `https://bookcloud.me/images/${urls}.jpg`,
+      ebookUrl: `https://bookcloud.me/epub/${urls}.epub`,
       price: body.price
     });
     data.save();
+    return urls;
   }
 
   async getBook(tag_) {

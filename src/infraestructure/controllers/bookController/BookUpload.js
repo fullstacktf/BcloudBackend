@@ -9,16 +9,16 @@ export class BookUpload {
       return res.status(400).send("No files were uploaded.");
     }
 
+    const urls = await dataBase.addBook(body);
+
     let epubFile = files.epubFile;
     let imageFile = files.imageFile;
 
-    dataBase.addBook(body, imageFile.name, epubFile.name);
-
-    epubFile.mv(`/data/epub/${epubFile.name}`, (err) => {
+    epubFile.mv(`/data/epub/${urls}.epub`, (err) => {
       if (err) return res.status(500).send(err);
     });
 
-    imageFile.mv(`/data/images/${imageFile.name}`, (err) => {
+    imageFile.mv(`/data/images/${urls}.jpg`, (err) => {
       if (err) return res.status(500).send(err);
     });
     return "File uploaded!";

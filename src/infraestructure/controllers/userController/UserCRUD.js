@@ -26,7 +26,7 @@ export class UserCRUD {
     if(token != null)
       return({ token: token })
     else 
-      return({message:"Error en el login. Email o contraseña no valida"})
+      return({message:"Error en el login. Email o contraseña no validos"})
   }
 
   static async verifyToken(body){

@@ -15,6 +15,8 @@ export class UserRepository extends Db {
   async findUser(email, passw) {
     Helper.connectDatabase();
     const user = await UserData.findOne({ email });
+    if(user == null)
+      return null;
     let passwordIsValid = compareSync(passw, user.passw);
 
     if (passwordIsValid) {
