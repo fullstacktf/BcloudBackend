@@ -43,4 +43,10 @@ router.post("/getLikes", async (req,res) =>{
   res.status(200).json(response);
 });
 
+router.post("/buybook", async (req,res) =>{
+  const response = await userController.UserLikes.buyBook(req.body);
+  res.status(200).json(response);
+});
+
+
 export default router;
