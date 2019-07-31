@@ -34,7 +34,6 @@ export class BookCRUD {
   }
 
   static async getBookWithGeners(body) {
-
     let likes = [];
     for (const like of body.likes.slice(0, 5)) {
       likes.push(like.like);

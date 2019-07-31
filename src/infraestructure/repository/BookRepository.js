@@ -64,14 +64,15 @@ export class BookRepository extends Db {
 
   async getBookWithGeners(likesUser) {
     Helper.connectDatabase();
-
     let books = [];
     for (const i of likesUser) {
-      let data = await BookData.findOne({ genero: i });
+      let data = await BookData.find({ genero: i });
       if(data != null)
         books.push(data);
     }
+
     let recommendedBooks = Helper.deleteDuplicatesBooks(books);
+    recommendedBooks = Helper.resize(recommendedBooks);
     return recommendedBooks;
   } 
 }
