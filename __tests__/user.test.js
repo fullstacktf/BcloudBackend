@@ -1,8 +1,7 @@
-import { BasicRecommender } from '../src/application/BasicRecommender';
+
 import { Book } from '../src/domain/Book';
 import { Helper } from '../src/infraestructure/repository/Helper'
 let book = new Book();
-let recommender = new BasicRecommender();
 
 
 let likes = [];
@@ -17,27 +16,6 @@ beforeEach(() =>{
     return likes;
   })
 
-describe("Testing our Recommender", () => {
-  test("Updating likes from user", () => {
-    const newLike = 'Thriller';
-    const returned = [ { like: 'Thriller', pond: 3 },
-    { like: 'Terror', pond: 2 },
-    { like: 'Ficción', pond: 2 },
-    { like: 'Romántica', pond: 1 },
-    { like: 'Viajes', pond: 1 },
-    { like: 'Investigación', pond: 1 },
-    { like: 'Biografía', pond: 1 },
-    { like: 'Aventura', pond: 1 },
-    { like: 'Autoayuda', pond: 1 },
-    { like: 'Erótica', pond: 1 },
-    { like: 'Hogar', pond: 1 },
-    { like: 'Enciclopedia', pond: 1 },
-    { like: 'Política', pond: 1 },
-    { like: 'Sociedad', pond: 1 },
-    { like: 'Infantil', pond: 1 } ];
-    expect(recommender.updateLikes(likes,newLike)).toEqual(returned);
-  });
-});
 
 describe("Testing tagged urls for the book", () => {
   test("Pass the book title and create the tag", () => {
