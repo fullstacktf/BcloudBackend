@@ -1,15 +1,18 @@
 {
   "name": "bcloud",
   "version": "1.0.0",
-  "description": "BookCloud Backend",
+  "description": "My webpack project",
   "author": "Grupo5",
   "private": true,
   "scripts": {
     "dev": "babel-node src/app.js",
     "test": "jest --watch",
-    "testTravis": "jest"
+    "testTravis": "jest",
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "dependencies": {
+    "@webpack-cli/init": "^0.2.2",
     "bcrypt": "^3.0.2",
     "config": "^3.1.0",
     "cors": "^2.8.5",
@@ -19,7 +22,8 @@
     "jsonwebtoken": "^8.4.0",
     "mongo": "^0.1.0",
     "mongodb": "^3.1.10",
-    "mongoose": "^5.3.12"
+    "mongoose": "^5.3.12",
+    "webpack-cli": "^3.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
