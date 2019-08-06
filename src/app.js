@@ -9,8 +9,15 @@ import bookRouter from './infraestructure/routes/bookRouter';
 app.use(fileUpload());
 app.use(express.json());
 app.use(cors());
-app.use('/users',userRouter);
-app.use('/books',bookRouter);
+app.use('/api/users',userRouter);
+app.use('/api/books',bookRouter);
+
+app.options("/*", function(req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.sendStatus(200);
+});
 
 
 app.listen(process.env.PORT || 8081, err => {
