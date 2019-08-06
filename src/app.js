@@ -6,15 +6,18 @@ import userRouter from './infraestructure/routes/userRouter';
 import bookRouter from './infraestructure/routes/bookRouter';
 
 const corsOptions = {
-  allowedHeaders: ['Content-Type', 'Authorization']
-};
+  origin: ['https://new.recipemug.club', 'https://api.recipemug.club', 'https://recipemug.club', 'http://localhost:8008'],
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "X-Access-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  preflightContinue: false
+}
 
-app.use(fileUpload());
-app.use(express.json());
 app.use(cors(corsOptions));
 
 
-
+app.use(fileUpload());
+app.use(express.json());
 app.use('/api/users',userRouter);
 app.use('/api/books',bookRouter);
 
