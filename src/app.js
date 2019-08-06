@@ -19,6 +19,11 @@ app.options("/*", function(req, res) {
   res.sendStatus(200);
 });
 
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 
 app.listen(process.env.PORT || 8081, err => {
   if (err) {
