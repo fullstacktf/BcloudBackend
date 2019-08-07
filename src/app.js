@@ -6,7 +6,7 @@ import userRouter from './infraestructure/routes/userRouter';
 import bookRouter from './infraestructure/routes/bookRouter';
 
 const corsOptions = {
-  origin: ['https://new.recipemug.club', 'https://api.recipemug.club', 'https://recipemug.club', 'http://localhost:1234'],
+  origin: ['https://bookcloud.me', 'http://localhost:1234'],
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "X-Access-Token"],
   credentials: true,
   methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
