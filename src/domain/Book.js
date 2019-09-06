@@ -1,22 +1,22 @@
 
-class Book {
+export class Book {
   constructor(){
     this.types = [
-      { tipo: "Thriller", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Aventura", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Terror", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Romantica", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Ficcion", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Investigacion", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Biografia", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Infantl", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Autoayuda", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Erotica", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Hogar", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Enciclopedia", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Política", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Sociedad", pond: 1.0, similiar: ["Romantica"] },
-      { tipo: "Viajes", pond: 1.0, similiar: ["Romantica"] }
+      { tipo: "Thriller",  similar: ["Terror","Investigación"] },
+      { tipo: "Aventura",  similar: ["Ficción","Biografía"] },
+      { tipo: "Terror",  similar: ["Thriller","Ficción","Investigación"] },
+      { tipo: "Romántica",  similar: ["Aventura","Erótica","Sociedad","Investigación"] },
+      { tipo: "Ficción",  similar: ["Terror","Thriller","Aventura"] },
+      { tipo: "Investigación",  similar: ["Biografía","Enciclopedia","Autoayuda"] },
+      { tipo: "Biografía",  similar: ["Enciclopedia","Sociedad","Autoayuda"] },
+      { tipo: "Infantil",  similar: ["Aventura","Hogar"] },
+      { tipo: "Autoayuda",  similar: ["Biografía","Investigación"] },
+      { tipo: "Erótica",  similar: ["Romantica","Aventura","Biografía"] },
+      { tipo: "Hogar",  similar: ["Romantica","Infantil","Sociedad"] },
+      { tipo: "Enciclopedia",  similar: ["Investigación"] },
+      { tipo: "Política",  similar: ["Investigación","Sociedad"] },
+      { tipo: "Sociedad",  similar: ["Romantica","Política"] },
+      { tipo: "Viajes",  similar: ["Romantica","Sociedad"] }
     ]
   }
 }

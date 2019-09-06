@@ -1,70 +1,34 @@
-const express = require("express");
-const bodyParse = require("body-parser");
-const cors = require("cors");
+import express from 'express';
+import cors from 'cors';
+import fileUpload from 'express-fileupload';
 const app = express();
-app.use(bodyParse.urlencoded({ extended: true }));
-app.use(bodyParse.json());
-app.use(cors());
+import userRouter from './infraestructure/routes/userRouter';
+import bookRouter from './infraestructure/routes/bookRouter';
 
-const DbMongo = require("../src/infraestructure/DbMongo");
-const DataBase = new DbMongo("mongo");
+const corsOptions = {
+  origin: ['https://bookcloud.me', 'http://localhost:1234'],
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "X-Access-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  preflightContinue: false
+}
+
+app.use(cors(corsOptions));
+
+
+app.use(fileUpload());
+app.use(express.json());
+app.use('/api/users',userRouter);
+app.use('/api/books',bookRouter);
+
+
 
 app.listen(process.env.PORT || 8081, err => {
   if (err) {
     console.log(err);
   }
-  console.log("Escuchando en el Puerto 8081");
+  console.log('listening in port 8081');
 });
 
-app.post("/", (req, res) => {
-  var Tipos;
 
-  var gustosUser = ["Thriller", "Aventura"];
 
-  gustosUser.forEach(function(i) {
-    Tipos.forEach(function(j) {
-      if (i == j.tipo) j.pond *= 3;
-      j.similiar.forEach(function(k) {
-        if (j.tipo == k) {
-          j.pond *= 1.5;
-        }
-      });
-    });
-  });
-
-  Tipos.sort(compare);
-  Tipos.forEach(function(i) {
-    console.log(i.tipo, i.pond);
-  });
-
-  res.send(Tipos);
-
-  /*
-  var data = new LibroData({
-      name: "El quijotee",
-      tipo: ["Ficción","Aventura"]
-  });
-
-  var data1 = new UserData({
-      name: "Sergio",
-      gustos: ["Ficción","Aventura"]
-  });
-
-  data.save();
-  data1.save();*/
-});
-
-app.post("/login", async (req, res) => {
-  const token = await DataBase.findUser(req.body.email,req.body.passw);
-  res.send({ token });
-});
-
-app.post("/signup", async (req, res) => {
-  const exist = await DataBase.existUser(req.body.email);
-  if(exist)
-    res.send("Email ya usado");
-  else{
-    DataBase.addUser(req.body.email, req.body.passw);
-    res.send(200);
-  }
-});
